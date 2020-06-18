@@ -1,0 +1,30 @@
+# 获取 REDIS_GIT_SHA1
+execute_process(
+    COMMAND git rev-parse --short HEAD
+    OUTPUT_VARIABLE REDIS_GIT_SHA1
+    OUTPUT_STRIP_TRAILING_WHITESPACE
+)
+message(STATUS "REDIS_GIT_SHA1: ${REDIS_GIT_SHA1}")
+
+# 获取 REDIS_GIT_DIRTY
+execute_process(
+    COMMAND git diff --no-ext-diff
+    COMMAND wc -l
+    OUTPUT_VARIABLE REDIS_GIT_DIRTY
+    OUTPUT_STRIP_TRAILING_WHITESPACE
+)
+message(STATUS "REDIS_GIT_DIRTY: ${REDIS_GIT_DIRTY}")
+
+# 获取 hostname
+cmake_host_system_information(RESULT HOSTNAME QUERY HOSTNAME)
+message(STATUS "HOSTNAME: ${HOSTNAME}")
+
+# 获取当前时间戳
+string(TIMESTAMP TIMESTAMP "%s")
+message(STATUS "TIMESTAMP: ${TIMESTAMP}")
+
+# 在构建目录生成release.h文件
+configure_file(
+    ${CMAKE_CURRENT_SOURCE_DIR}/release.h.cmake
+    ${CMAKE_CURRENT_BINARY_DIR}/release.h
+)

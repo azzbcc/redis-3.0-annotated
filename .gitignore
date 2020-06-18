@@ -25,3 +25,9 @@ deps/lua/src/liblua.a
 .make-*
 .prerequisites
 *.dSYM
+
+### clion
+.idea
+
+### cmake
+*build*
