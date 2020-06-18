@@ -7,6 +7,7 @@ include(CMakeLists.release.txt)
 
 include_directories(
     ${HR_INCLUDE_DIRS}
+    ${LN_INCLUDE_DIRS}
     ${CMAKE_CURRENT_BINARY_DIR}
 )
 
@@ -23,3 +24,20 @@ set(redis_benchmark_deps
 
 add_executable(redis-benchmark ${redis_benchmark_srcs})
 target_link_libraries(redis-benchmark ${redis_benchmark_deps})
+
+set(redis_cli_srcs
+    ae.c
+    anet.c
+    crc64.c
+    redis-cli.c
+    release.c
+    sds.c
+    zmalloc.c
+)
+set(redis_cli_deps
+    ${HR_LIBRARIES}
+    ${LN_LIBRARIES}
+)
+
+add_executable(redis-cli ${redis_cli_srcs})
+target_link_libraries(redis-cli ${redis_cli_deps})

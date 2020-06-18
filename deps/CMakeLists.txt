@@ -17,3 +17,12 @@ if (NOT HR_FOUND)
     set(HR_INCLUDE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/hiredis PARENT_SCOPE)
 endif()
 ##########################
+
+#### 编译 linenoise 依赖 ####
+set(linenoise_srcs
+    linenoise/linenoise.c
+)
+add_library(linenoise ${linenoise_srcs})
+set(LN_INCLUDE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/linenoise PARENT_SCOPE)
+set(LN_LIBRARIES linenoise PARENT_SCOPE)
+##########################
